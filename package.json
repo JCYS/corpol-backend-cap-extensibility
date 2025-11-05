@@ -1,0 +1,37 @@
+{
+  "name": "corpol-backend-node",
+  "version": "1.0.0",
+  "description": "A simple CAP project.",
+  "dependencies": {
+    "@cap-js-community/odata-v2-adapter": "^1.15.5",
+    "@cap-js/hana": "^2",
+    "@sap/cds": "^9",
+    "@sap/xssec": "^4",
+    "express": "^4"
+  },
+  "devDependencies": {
+    "@cap-js/sqlite": "^2",
+    "@sap/cds-dk": "^9"
+  },
+  "scripts": {
+    "start": "cds-serve"
+  },
+  "private": true,
+  "cds": {
+    "requires": {
+      "[production]": {
+        "db": {
+          "kind": "hana",
+          "credentials": {
+            "host": "1136df77-1adc-4ece-a0f1-b3fc0d427d17.hana.prod-us10.hanacloud.ondemand.com",
+            "port": "443",
+            "user": "S4HANA_EXTENSIBILITY_DEV",
+            "password": "Workshop1",
+            "schema": "S4HANA_EXTENSIBILITY_DEV"
+          }
+        },
+        "auth": "xsuaa"
+      }
+    }
+  }
+}

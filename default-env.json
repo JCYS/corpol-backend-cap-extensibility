@@ -1,0 +1,16 @@
+{
+    "VCAP_SERVICES": {
+        "hana": [
+            {
+                "name": "my-hana-service",
+                "credentials": {
+                    "host": "f0f2464e-64a0-40d4-a8c7-d5c6475c03fd.hana.trial-us10.hanacloud.ondemand.com",
+                    "port": "443",
+                    "user": "DBADMIN",
+                    "password": "Inicio$$$$$2025",
+                    "schema": "DBADMIN"
+                }
+            }
+        ]
+    }
+}
