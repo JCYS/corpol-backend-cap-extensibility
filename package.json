@@ -5,9 +5,13 @@
   "dependencies": {
     "@cap-js-community/odata-v2-adapter": "^1.15.5",
     "@cap-js/hana": "^2",
+    "@sap-cloud-sdk/connectivity": "^4.1.2",
+    "@sap-cloud-sdk/http-client": "^4.1.2",
+    "@sap-cloud-sdk/resilience": "^4.1.2",
     "@sap/cds": "^9",
     "@sap/xssec": "^4",
-    "express": "^4"
+    "express": "^4",
+    "node-cron": "^4.2.1"
   },
   "devDependencies": {
     "@cap-js/sqlite": "^2",
@@ -31,7 +35,46 @@
           }
         },
         "auth": "xsuaa"
-      }
+      },
+      "[temp]": {
+        "db": {
+          "kind": "hana",
+          "credentials": {
+            "host": "1136df77-1adc-4ece-a0f1-b3fc0d427d17.hana.prod-us10.hanacloud.ondemand.com",
+            "port": "443",
+            "user": "S4HANA_EXTENSIBILITY_QAS",
+            "password": "Inicio$2025.",
+            "schema": "S4HANA_EXTENSIBILITY_QAS"
+          }
+        }
+      },
+      "API_BUSINESS_PARTNER": {
+        "kind": "odata-v2",
+        "model": "srv/external/API_BUSINESS_PARTNER",
+        "[tempSandbox]": {
+          "credentials": {
+            "url": "https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_BUSINESS_PARTNER",
+            "headers": {
+              "APIKey": "mWMVgNs7dp9HlIeZZOj8JkZs4UwGVWkC"
+            }
+          }
+        },
+        "[temp]": {
+          "credentials": {
+            "url": "https://my417959-api.s4hana.cloud.sap",
+            "authentication": "BasicAuthentication",
+            "username": "WMS_USER",
+            "path": "/sap/opu/odata/sap/API_BUSINESS_PARTNER",
+            "password": "UjMRtPYCqkYHFASZGEJAyJuFadmvzEE@pNxQ6yUP"
+          }
+        },
+        "[production]": {
+          "credentials": {
+            "destination": "API_BUSINESS_PARTNER"
+          }
+        }
+      },
+      "destinations": true
     }
   }
 }

@@ -25,6 +25,7 @@ modules:
           srv-url: ${default-url}
     requires:
       - name: corpol-backend-node-auth
+      - name: corpol-backend-node-destination
       # - name: corpol-backend-node-db
 
   - name: corpol-backend-node
@@ -42,12 +43,12 @@ modules:
           url: ~{srv-url}
           forwardAuthToken: true
       - name: corpol-backend-node-auth
+      - name: corpol-backend-node-destination
     provides:
       - name: app-api
         properties:
           app-protocol: ${protocol}
           app-uri: ${default-uri}
-
   # - name: corpol-backend-node-db-deployer
   #   type: hdb
   #   path: gen/db
@@ -71,8 +72,13 @@ resources:
             - https://*~{app-api/app-uri}/**
     requires:
       - name: app-api
-  # - name: corpol-backend-node-db
-  #   type: com.sap.xs.hdi-container
-  #   parameters:
-  #     service: hana
-  #     service-plan: hdi-shared
+#  - name: corpol-backend-node-db
+#    type: com.sap.xs.hdi-container
+#    parameters:
+#      service: hana
+#      service-plan: hdi-shared
+  - name: corpol-backend-node-destination
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite
