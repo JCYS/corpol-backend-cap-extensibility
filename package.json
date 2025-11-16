@@ -22,6 +22,9 @@
   },
   "private": true,
   "cds": {
+    "model": [
+      "db/csn.json"
+    ],
     "requires": {
       "[production]": {
         "db": {
@@ -29,9 +32,9 @@
           "credentials": {
             "host": "1136df77-1adc-4ece-a0f1-b3fc0d427d17.hana.prod-us10.hanacloud.ondemand.com",
             "port": "443",
-            "user": "S4HANA_EXTENSIBILITY_DEV",
-            "password": "Workshop1",
-            "schema": "S4HANA_EXTENSIBILITY_DEV"
+            "user": "S4HANA_EXTENSIBILITY_PRD",
+            "password": "Inicio2025$",
+            "schema": "S4HANA_EXTENSIBILITY_PRD"
           }
         },
         "auth": "xsuaa"
@@ -63,14 +66,57 @@
           "credentials": {
             "url": "https://my417959-api.s4hana.cloud.sap",
             "authentication": "BasicAuthentication",
-            "username": "WMS_USER",
+            "username": "BTP_CORPOL_PRD",
             "path": "/sap/opu/odata/sap/API_BUSINESS_PARTNER",
-            "password": "UjMRtPYCqkYHFASZGEJAyJuFadmvzEE@pNxQ6yUP"
+            "password": "VHLpcXVcjEEHZ[UbMVtNhSUQUXjNBijmvykj5LYb"
           }
         },
         "[production]": {
           "credentials": {
-            "destination": "API_BUSINESS_PARTNER"
+            "destination": "S4HANA_CLOUD_PUBLIC",
+            "path": "/sap/opu/odata/sap/API_BUSINESS_PARTNER"
+          }
+        }
+      },
+      "ExchangeRateService": {
+        "kind": "odata-v2",
+        "model": "srv/external/ExchangeRateService",
+        "csrf": true,
+        "csrfInBatch": true,
+        "[temp]": {
+          "credentials": {
+            "url": "https://my417959-api.s4hana.cloud.sap",
+            "authentication": "BasicAuthentication",
+            "username": "BTP_CORPOL_PRD",
+            "path": "/sap/opu/odata/sap/YY1_EXCHANGERATE_CDS",
+            "password": "VHLpcXVcjEEHZ[UbMVtNhSUQUXjNBijmvykj5LYb"
+          }
+        },
+        "[production]": {
+          "credentials": {
+            "destination": "S4HANA_CLOUD_PUBLIC",
+            "path": "/sap/opu/odata/sap/YY1_EXCHANGERATE_CDS"
+          }
+        }
+      },
+      "LetraAccountReceivableSrv": {
+        "kind": "odata",
+        "model": "srv/external/LetraAccountReceivableSrv",
+        "csrf": true,
+        "csrfInBatch": true,
+        "[temp]": {
+          "credentials": {
+            "url": "https://my417959-api.s4hana.cloud.sap",
+            "authentication": "BasicAuthentication",
+            "username": "BTP_CORPOL_PRD",
+            "path": "/sap/opu/odata4/sap/zletrasservicebinding/srvd/sap/zletrasservicedefinition/0001",
+            "password": "VHLpcXVcjEEHZ[UbMVtNhSUQUXjNBijmvykj5LYb"
+          }
+        },
+        "[production]": {
+          "credentials": {
+            "destination": "S4HANA_CLOUD_PUBLIC",
+            "path": "/sap/opu/odata4/sap/zletrasservicebinding/srvd/sap/zletrasservicedefinition/0001"
           }
         }
       },
