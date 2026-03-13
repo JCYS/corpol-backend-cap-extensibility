@@ -4507,11 +4507,9 @@
           ]
         },
         "NetPaymentDaysLetra": {
-          "@title": "{i18n>letra_NetPaymentDaysLetra}",
           "type": "cds.Integer"
         },
         "DueCalculationBaseDateLetra": {
-          "@title": "{i18n>letra_DueCalculationBaseDateLetra}",
           "type": "cds.Date"
         }
       }
@@ -5449,11 +5447,9 @@
           ]
         },
         "NetPaymentDaysLetra": {
-          "@title": "{i18n>letra_NetPaymentDaysLetra}",
           "type": "cds.Integer"
         },
         "DueCalculationBaseDateLetra": {
-          "@title": "{i18n>letra_DueCalculationBaseDateLetra}",
           "type": "cds.Date"
         },
         "TipoLetraComposition": {
@@ -11158,11 +11154,9 @@
           ]
         },
         "NetPaymentDaysLetra": {
-          "@title": "{i18n>letra_NetPaymentDaysLetra}",
           "type": "cds.Integer"
         },
         "DueCalculationBaseDateLetra": {
-          "@title": "{i18n>letra_DueCalculationBaseDateLetra}",
           "type": "cds.Date"
         }
       }
@@ -13536,11 +13530,9 @@
           ]
         },
         "NetPaymentDaysLetra": {
-          "@title": "{i18n>letra_NetPaymentDaysLetra}",
           "type": "cds.Integer"
         },
         "DueCalculationBaseDateLetra": {
-          "@title": "{i18n>letra_DueCalculationBaseDateLetra}",
           "type": "cds.Date"
         },
         "TipoLetraComposition": {

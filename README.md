@@ -28,3 +28,32 @@ Learn more at https://cap.cloud.sap/docs/get-started/.
 mbt build
 
 cf push
+
+## Ampliaciones
+
+Solo extender las entidades
+```text
+db
+ ├── extensions
+ │   ├── extend-ext.cds
+ │   └── <X>
+ └── test
+```
+Colocas el name espace del csn.json
+```
+namespace global.finance;
+
+extend entity ![Letras.Letras] with {
+comentarioBtp : String(255);
+}
+```
+
+Luego Compilas
+```
+cds compile db/csn.json db/extensions/extend-ext.cds --to json > merged.json   
+```
+
+y Luego lo migras a Hana
+```
+cds compile db/csn.json db/extensions/extend-ext.cds --to sql --dialect hana > merged.sql  
+```
