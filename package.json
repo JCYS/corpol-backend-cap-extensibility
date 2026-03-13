@@ -64,7 +64,7 @@
         },
         "[temp]": {
           "credentials": {
-            "url": "https://my417959-api.s4hana.cloud.sap",
+            "url": "https://my419933-api.s4hana.cloud.sap",
             "authentication": "BasicAuthentication",
             "username": "BTP_CORPOL_PRD",
             "path": "/sap/opu/odata/sap/API_BUSINESS_PARTNER",
@@ -106,7 +106,7 @@
         "csrfInBatch": true,
         "[temp]": {
           "credentials": {
-            "url": "https://my417959-api.s4hana.cloud.sap",
+            "url": "https://my419933-api.s4hana.cloud.sap",
             "authentication": "BasicAuthentication",
             "username": "BTP_CORPOL_PRD",
             "path": "/sap/opu/odata4/sap/zletrasservicebinding/srvd/sap/zletrasservicedefinition/0001",
