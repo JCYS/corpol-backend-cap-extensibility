@@ -33,9 +33,9 @@
           "credentials": {
             "host": "1136df77-1adc-4ece-a0f1-b3fc0d427d17.hana.prod-us10.hanacloud.ondemand.com",
             "port": "443",
-            "user": "S4HANA_EXTENSIBILITY_QAS",
-            "password": "Inicio$2025.",
-            "schema": "S4HANA_EXTENSIBILITY_QAS"
+            "user": "S4HANA_EXTENSIBILITY_PRD",
+            "password": "Inicio2025$",
+            "schema": "S4HANA_EXTENSIBILITY_PRD"
           }
         },
         "auth": "xsuaa"
