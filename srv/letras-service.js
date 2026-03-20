@@ -65,5 +65,63 @@ module.exports = cds.service.impl(async function () {
     this.after("DELETE", "Letras", async (data, req) => {
         await recalcularPorPlanilla(req._planillaIdToRecalc, req);
     });
+    function addDaysSafe(dateStr, days) {
+        const [year, month, day] = dateStr.split('-').map(Number);
+
+        const date = new Date(year, month - 1, day);
+        date.setDate(date.getDate() + Number(days));
+
+        const yyyy = date.getFullYear();
+        const mm = String(date.getMonth() + 1).padStart(2, '0');
+        const dd = String(date.getDate()).padStart(2, '0');
+
+        return `${yyyy}-${mm}-${dd}`;
+    }
+    this.after("UPDATE", "Letras", async (data, req) => {
+        const id = req.params?.[0]?.ID || req.data?.ID || data?.ID;
+
+        console.log("AFTER ID:", id);
+        console.log("AFTER DATA:", data);
+            const letra = await SELECT.one
+                .from(Letras)
+                .where({ ID: id })
+                .columns([
+                    "ID",
+                    "DueCalculationBaseDateLetra",
+                    "NetPaymentDaysLetra"
+                ]);
+        console.log("Letras AFTER Disponible"+JSON.stringify(letra))
+        const fechaVencimiento = addDaysSafe(
+            letra.DueCalculationBaseDateLetra,
+            letra.NetPaymentDaysLetra
+        );
+        //
+        console.log("AFTER Letras Fecha Vencimiento Calculo "+fechaVencimiento)
+            await UPDATE(Letras)
+                .set({ FechaVencimiento: fechaVencimiento })
+                .where({ ID: letra.ID });
+        // console.log("Letras AFTER SAVE FECHA AUMENTADA"+JSON.stringify(letraUpdate))
+    });
+    this.before("UPDATE", "Letras", async (req) => {
+        // const id = req.params?.[0]?.ID || req.data?.ID;
+        //
+        // console.log("BEFORE ID:", id);
+        // console.log("BEFORE DATA:", req.data);
+        //     const letra = await SELECT.one
+        //         .from(Letras)
+        //         .where({ ID: id })
+        //         .columns([
+        //             "ID",
+        //             "DueCalculationBaseDateLetra",
+        //             "NetPaymentDaysLetra"
+        //         ]);
+        //     console.log("Letras BEFORE Disponible"+JSON.stringify(letra))
+        //     const fechaVencimiento = addDaysSafe(
+        //         letra.DueCalculationBaseDateLetra,
+        //         letra.NetPaymentDaysLetra
+        //     );
+        //     //
+        //     console.log("BEFORE Letras Fecha Vencimiento Calculo "+fechaVencimiento)
+    });
 
 });
