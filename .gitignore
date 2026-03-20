@@ -6,6 +6,8 @@ connection.properties
 gen/
 node_modules/
 target/
+.idea/
+.vscode/
 
 # Web IDE, App Studio
 .che/

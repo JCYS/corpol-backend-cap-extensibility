@@ -57,3 +57,5 @@ y Luego lo migras a Hana
 ```
 cds compile db/csn.json db/extensions/extend-ext.cds --to sql --dialect hana > merged.sql  
 ```
+
+Para tener el compilado final como si fuera un "MBT build", debe compilar a JSON todos los cds
