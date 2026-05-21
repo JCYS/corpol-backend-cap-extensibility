@@ -77,51 +77,68 @@ module.exports = cds.service.impl(async function () {
 
         return `${yyyy}-${mm}-${dd}`;
     }
-    this.after("UPDATE", "Letras", async (data, req) => {
-        const id = req.params?.[0]?.ID || req.data?.ID || data?.ID;
-
-        console.log("AFTER ID:", id);
-        console.log("AFTER DATA:", data);
-            const letra = await SELECT.one
-                .from(Letras)
-                .where({ ID: id })
-                .columns([
-                    "ID",
-                    "DueCalculationBaseDateLetra",
-                    "NetPaymentDaysLetra"
-                ]);
-        console.log("Letras AFTER Disponible"+JSON.stringify(letra))
-        const fechaVencimiento = addDaysSafe(
-            letra.DueCalculationBaseDateLetra,
-            letra.NetPaymentDaysLetra
-        );
-        //
-        console.log("AFTER Letras Fecha Vencimiento Calculo "+fechaVencimiento)
-            await UPDATE(Letras)
-                .set({ FechaVencimiento: fechaVencimiento })
-                .where({ ID: letra.ID });
-        // console.log("Letras AFTER SAVE FECHA AUMENTADA"+JSON.stringify(letraUpdate))
-    });
+    // this.after("UPDATE", "Letras", async (data, req) => {
+    //     const id = req.params?.[0]?.ID || req.data?.ID || data?.ID;
+    //
+    //     console.log("AFTER ID:", id);
+    //     console.log("AFTER DATA:", data);
+    //         const letra = await SELECT.one
+    //             .from(Letras)
+    //             .where({ ID: id })
+    //             .columns([
+    //                 "ID",
+    //                 "DueCalculationBaseDateLetra",
+    //                 "NetPaymentDaysLetra"
+    //             ]);
+    //     console.log("Letras AFTER Disponible"+JSON.stringify(letra))
+    //     const fechaVencimiento = addDaysSafe(
+    //         letra.DueCalculationBaseDateLetra,
+    //         letra.NetPaymentDaysLetra
+    //     );
+    //     //
+    //     console.log("AFTER Letras Fecha Vencimiento Calculo "+fechaVencimiento)
+    //         await UPDATE(Letras)
+    //             .set({ FechaVencimiento: fechaVencimiento })
+    //             .where({ ID: letra.ID });
+    //     // console.log("Letras AFTER SAVE FECHA AUMENTADA"+JSON.stringify(letraUpdate))
+    // });
     this.before("UPDATE", "Letras", async (req) => {
-        // const id = req.params?.[0]?.ID || req.data?.ID;
-        //
-        // console.log("BEFORE ID:", id);
-        // console.log("BEFORE DATA:", req.data);
-        //     const letra = await SELECT.one
-        //         .from(Letras)
-        //         .where({ ID: id })
-        //         .columns([
-        //             "ID",
-        //             "DueCalculationBaseDateLetra",
-        //             "NetPaymentDaysLetra"
-        //         ]);
-        //     console.log("Letras BEFORE Disponible"+JSON.stringify(letra))
-        //     const fechaVencimiento = addDaysSafe(
-        //         letra.DueCalculationBaseDateLetra,
-        //         letra.NetPaymentDaysLetra
-        //     );
-        //     //
-        //     console.log("BEFORE Letras Fecha Vencimiento Calculo "+fechaVencimiento)
+        const id = req.params?.[0]?.ID || req.data?.ID;
+        if (!id) return;
+
+        const changedBaseDate = Object.prototype.hasOwnProperty.call(
+            req.data,
+            "DueCalculationBaseDateLetra"
+        );
+
+        const changedDays = Object.prototype.hasOwnProperty.call(
+            req.data,
+            "NetPaymentDaysLetra"
+        );
+
+        if (!changedBaseDate && !changedDays) return;
+
+        const current = await SELECT.one
+            .from(Letras)
+            .where({ ID: id })
+            .columns([
+                "DueCalculationBaseDateLetra",
+                "NetPaymentDaysLetra"
+            ]);
+
+        const baseDate =
+            req.data.DueCalculationBaseDateLetra ??
+            current?.DueCalculationBaseDateLetra;
+
+        const days =
+            req.data.NetPaymentDaysLetra ??
+            current?.NetPaymentDaysLetra;
+
+        const fechaVencimiento = addDaysSafe(baseDate, days);
+
+        if (fechaVencimiento) {
+            req.data.FechaVencimiento = fechaVencimiento;
+        }
     });
 
 });
