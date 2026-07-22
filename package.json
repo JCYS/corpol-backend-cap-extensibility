@@ -122,7 +122,28 @@
           }
         }
       },
-      "destinations": true
+      "destinations": true,
+      "LetraAccountReceivableSrvV2": {
+        "kind": "odata",
+        "model": "srv/external/LetraAccountReceivableSrvV2",
+        "csrf": true,
+        "csrfInBatch": true,
+        "[temp]": {
+          "credentials": {
+            "url": "https://my417959-api.s4hana.cloud.sap",
+            "authentication": "BasicAuthentication",
+            "username": "SIDE_BY_SIDE_EXTENSIBILITY_USER",
+            "path": "/sap/opu/odata4/sap/zletrasservicebinding/srvd/sap/zletrasservicedefinition/0001",
+            "password": "LTQtXZeDGKneJN<9kwXnYBPzNfnnDlFfnREgkTtZ"
+          }
+        },
+        "[production]": {
+          "credentials": {
+            "destination": "S4HANA_CLOUD_PUBLIC",
+            "path": "/sap/opu/odata4/sap/zletrasservicebinding/srvd/sap/zletrasservicedefinition/0001"
+          }
+        }
+      }
     }
   }
 }
